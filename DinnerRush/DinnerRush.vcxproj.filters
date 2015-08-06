@@ -4,20 +4,29 @@
     <Filter Include="Project">
       <UniqueIdentifier>{575d5432-2586-4289-8114-4392ea3cc41a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\Utility">
+      <UniqueIdentifier>{4ff84e4a-9b22-4940-9d30-44a4c3353dee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Project</Filter>
     </ClCompile>
     <ClCompile Include="Util.cpp">
+      <Filter>Project\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Program.cpp">
       <Filter>Project</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Util.h">
-      <Filter>Project</Filter>
+      <Filter>Project\Utility</Filter>
     </ClInclude>
     <ClInclude Include="Types.h">
+      <Filter>Project\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Program.h">
       <Filter>Project</Filter>
     </ClInclude>
   </ItemGroup>
