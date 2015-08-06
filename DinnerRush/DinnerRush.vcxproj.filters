@@ -17,5 +17,8 @@
     <ClInclude Include="Util.h">
       <Filter>Project</Filter>
     </ClInclude>
+    <ClInclude Include="Types.h">
+      <Filter>Project</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
