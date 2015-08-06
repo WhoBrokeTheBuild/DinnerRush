@@ -4,9 +4,9 @@
 
 int main(int argc, char* argv[]) 
 {
-	Program *prog = new Program();
-	prog->run();
-	delete prog;
+	Program::Inst()->run();
+
+	delete Program::Inst();
 
 	return EXIT_SUCCESS;
 }
