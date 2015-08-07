@@ -13,6 +13,7 @@ DataLoader::~DataLoader()
 {
 	mSMap.clear();
 	mIMap.clear(); 
+	mFMap.clear();
 }
 
 void DataLoader::loadInfo()
@@ -25,35 +26,62 @@ void DataLoader::loadInfo()
 		while (!loadFile.eof())
 		{
 			string key;
-			string toAdd, junk;
+			string toAdds, junk;
+			int toAddi;
+			float toAddf;
 			char typeID;
 
 			loadFile >> typeID;
 
 			if (typeID == 's')
 			{//load string
-				loadFile >> key >> toAdd;
+				loadFile >> key >> toAdds;
 				
 				map<DataKey, string>::iterator iter = mSMap.find(key);
 				if (iter == mSMap.end())
 				{
-					mSMap[key] = toAdd;
+					mSMap[key] = toAdds;
 				}
 
-				else
+				
+			}
+
+			else if (typeID == 'i')
+			{//load int
+				loadFile >> key >> toAddi;
+
+				map<DataKey, int>::iterator iter = mIMap.find(key);
+				if (iter == mIMap.end())
 				{
-					getline(loadFile, junk);
+					mIMap[key] = toAddi;
 				}
 			}
-		}
 
+			else if (typeID == 'f')
+			{//load float
+				loadFile >> key >> toAddf;
 
+				map<DataKey, float>::iterator iter = mFMap.find(key);
+				if (iter == mFMap.end())
+				{
+					mFMap[key] = toAddf;
+				}
+			}
+
+			else
+			{
+				getline(loadFile, junk);
+			}
+
+		}//end while loop
 	}
 
 	else //File couldnt Open
 	{
 		cout << "Could not open data file";
 	}
+
+	loadFile.close();
 }
 
 int DataLoader::getInt(const DataKey& key)
@@ -91,6 +119,19 @@ string DataLoader::getAsset(const DataKey& key)
 	if (iter != mSMap.end())
 	{
 		return  path + iter->second;
+	}
+
+	return toReturn;
+}
+
+float DataLoader::getFloat(const DataKey& key)
+{
+	map<DataKey, float>::iterator iter = mFMap.find(key);
+	float toReturn = -1;
+
+	if (iter != mFMap.end())
+	{
+		return  iter->second;
 	}
 
 	return toReturn;

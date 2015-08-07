@@ -2,6 +2,7 @@
 
 #include <SDL_ttf.h>
 #include "Util.h"
+#include "DataLoader.h"
 
 Program * Program::sp_Instance = nullptr;
 
@@ -32,11 +33,17 @@ Program::~Program(void)
 	SDL_Quit();
 }
 
+void Program::init(void)
+{
+	gpDataLoader = new DataLoader();
+	gpDataLoader->loadInfo();
+	mp_MainFont = new Font(gpDataLoader->getString("AssetPath") + gpDataLoader->getString("MainFont"), 50);
+}
+
 void Program::run(void)
 {
+	init();
 	createWindow();
-
-	mp_MainFont = new Font("../Assets/Roboto.ttf", 50);
 
 	bool running = true;
 

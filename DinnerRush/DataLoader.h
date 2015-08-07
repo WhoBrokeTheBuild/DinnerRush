@@ -26,6 +26,7 @@ private:
 
 	map<DataKey, string> mSMap; //Map for string data
 	map<DataKey, int> mIMap; //Map for int data 
+	map<DataKey, float> mFMap;
 };
 
 extern DataLoader* gpDataLoader;

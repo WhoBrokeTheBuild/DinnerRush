@@ -19,6 +19,8 @@ public:
 
 	void run(void);
 
+	void init(void);
+
 	void createWindow(void);
 	void destroyWindow(void);
 

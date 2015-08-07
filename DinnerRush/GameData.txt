@@ -1,0 +1,6 @@
+//Asset paths
+s AssetPath ../Assets/
+s MainFont Roboto.ttf
+
+//Variable data
+//i "some_static_menu_item"_x "x_location"

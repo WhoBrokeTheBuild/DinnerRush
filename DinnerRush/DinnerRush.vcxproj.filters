@@ -67,7 +67,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="GameData.txt.txt">
+    <Text Include="GameData.txt">
       <Filter>Project\Utility</Filter>
     </Text>
   </ItemGroup>
