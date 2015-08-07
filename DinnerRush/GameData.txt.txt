@@ -1,0 +1,5 @@
+//Asset paths (note: work in progress)
+s AssetPath "Path to asset folder goes here"
+
+//Variable data
+i "some static menu item"_x "x location"
