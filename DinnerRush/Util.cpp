@@ -1,6 +1,7 @@
 #include "Util.h"
 
-#include <cstdio>
+using std::ifstream;
+using std::ofstream;
 
 void pause(void)
 {
@@ -22,28 +23,28 @@ string getFileExt(const string& filename)
 	return "";
 }
 
-byte readBinaryByte(std::ifstream& file)
+byte readBinaryByte(ifstream& file)
 {
 	byte val;
 	file.read((char*)&val, sizeof(val));
 	return val;
 }
 
-int readBinaryInt(std::ifstream& file)
+int readBinaryInt(ifstream& file)
 {
 	int val;
 	file.read((char*)&val, sizeof(val));
 	return val;
 }
 
-float readBinaryFloat(std::ifstream& file)
+float readBinaryFloat(ifstream& file)
 {
 	float val;
 	file.read((char*)&val, sizeof(val));
 	return val;
 }
 
-string readBinaryString(std::ifstream& file)
+string readBinaryString(ifstream& file)
 {
 	unsigned int strLen;
 	vector<char> str;
@@ -57,22 +58,22 @@ string readBinaryString(std::ifstream& file)
 	return string(str.data());
 }
 
-void writeBinaryByte(std::ofstream& file, const byte& value)
+void writeBinaryByte(ofstream& file, const byte& value)
 {
 	file.write((const char*)&value, sizeof(value));
 }
 
-void writeBinaryInt(std::ofstream& file, const int& value)
+void writeBinaryInt(ofstream& file, const int& value)
 {
 	file.write((const char*)&value, sizeof(value));
 }
 
-void writeBinaryFloat(std::ofstream& file, const float& value)
+void writeBinaryFloat(ofstream& file, const float& value)
 {
 	file.write((const char*)&value, sizeof(value));
 }
 
-void writeBinaryString(std::ofstream& file, const string& value)
+void writeBinaryString(ofstream& file, const string& value)
 {
 	writeBinaryInt(file, value.length());
 	file.write(value.data(), value.length());

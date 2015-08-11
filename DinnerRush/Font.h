@@ -6,7 +6,7 @@
 #include "Types.h"
 #include <SDL_ttf.h>
 
-#include "Texture.h"
+class Texture;
 
 class Font
 {

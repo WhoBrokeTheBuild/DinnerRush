@@ -1,10 +1,13 @@
 #include "Program.h"
 
+#include <SDL.h>
 #include <SDL_ttf.h>
-#include "Util.h"
-#include "DataLoader.h"
 
 #include "Benchmark.h"
+#include "DataLoader.h"
+#include "Util.h"
+#include "Font.h"
+#include "Texture.h"
 
 Program * Program::sp_Instance = nullptr;
 

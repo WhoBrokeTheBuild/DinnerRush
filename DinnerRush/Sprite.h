@@ -3,8 +3,9 @@
 #ifndef SPRITE_H
 #define SPRITE_H
 
-#include <SDL.h>
-#include "Texture.h"
+#include "Types.h"
+
+class Texture;
 
 class Sprite
 {
@@ -17,7 +18,7 @@ public:
 private:
 
 	Texture		*mp_Texture;
-	SDL_Rect    m_Area;
+	Rect        m_Area;
 
 }; // Sprite
 

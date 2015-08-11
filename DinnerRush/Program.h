@@ -4,10 +4,12 @@
 #define PROGRAM_H
 
 #include "Types.h"
-#include <SDL.h>
 
-#include "DataLoader.h"
-#include "Font.h"
+class DataLoader;
+class Font;
+
+struct SDL_Window;
+struct SDL_Renderer;
 
 class Program
 {
