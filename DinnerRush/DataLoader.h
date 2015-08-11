@@ -4,10 +4,6 @@
 #define DATA_LOADER_H
 
 #include "Types.h"
-#include <map>
-//Include Vector2D/Point in future
-
-using namespace std;
 
 typedef string DataKey;
 
@@ -18,6 +14,9 @@ public:
 	~DataLoader();
 
 	void loadData(const string& filename);
+	void saveData(const string& filename);
+
+	void printAll(void);
 
 	int	   getInt(const DataKey& key);
 	float  getFloat(const DataKey& key);
@@ -30,9 +29,12 @@ private:
 	void loadTextData(const string& filename);
 	void loadBinaryData(const string& filename);
 
-	map<DataKey, string> mSMap; //Map for string data
-	map<DataKey, int> mIMap; //Map for int data 
-	map<DataKey, float> mFMap;
+	void saveTextData(const string& filename);
+	void saveBinaryData(const string& filename);
+
+	map<DataKey, string>	m_StrMap; // Map for string data
+	map<DataKey, int>		m_IntMap; // Map for int data 
+	map<DataKey, float>		m_FltMap; // Map for float data
 };
 
 #endif // DATA_LOADER_H

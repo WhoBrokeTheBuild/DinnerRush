@@ -5,6 +5,9 @@
 #include "Util.h"
 #include "Benchmark.h"
 
+using std::ifstream;
+using std::ofstream;
+
 DataLoader::DataLoader()
 {
 
@@ -12,9 +15,9 @@ DataLoader::DataLoader()
 
 DataLoader::~DataLoader()
 {
-	mSMap.clear();
-	mIMap.clear(); 
-	mFMap.clear();
+	m_StrMap.clear();
+	m_IntMap.clear(); 
+	m_FltMap.clear();
 }
 
 void DataLoader::loadData(const string& filename)
@@ -30,12 +33,24 @@ void DataLoader::loadData(const string& filename)
 
 }
 
+void DataLoader::saveData(const string& filename)
+{
+	const string& ext = getFileExt(filename);
+
+	if (ext == "txt") {
+		saveTextData(filename);
+	}
+	else if (ext == "bin") {
+		saveBinaryData(filename);
+	}
+}
+
 int DataLoader::getInt(const DataKey& key)
 {
-	map<DataKey, int>::iterator iter = mIMap.find(key);
+	map<DataKey, int>::iterator iter = m_IntMap.find(key);
 	int toReturn = -1;
 
-	if (iter != mIMap.end())
+	if (iter != m_IntMap.end())
 	{
 		return iter->second;
 	}
@@ -45,10 +60,10 @@ int DataLoader::getInt(const DataKey& key)
 
 string DataLoader::getString(const DataKey& key)
 {
-	map<DataKey, string>::iterator iter = mSMap.find(key);
+	map<DataKey, string>::iterator iter = m_StrMap.find(key);
 	string toReturn = "_";
 
-	if (iter != mSMap.end())
+	if (iter != m_StrMap.end())
 	{
 		return  iter->second;
 	}
@@ -58,11 +73,11 @@ string DataLoader::getString(const DataKey& key)
 
 string DataLoader::getAsset(const DataKey& key)
 {
-	map<DataKey, string>::iterator iter = mSMap.find(key);
+	map<DataKey, string>::iterator iter = m_StrMap.find(key);
 	string path = getString("AssetPath");
 	string toReturn = "_";
 
-	if (iter != mSMap.end())
+	if (iter != m_StrMap.end())
 	{
 		return  path + iter->second;
 	}
@@ -72,10 +87,10 @@ string DataLoader::getAsset(const DataKey& key)
 
 float DataLoader::getFloat(const DataKey& key)
 {
-	map<DataKey, float>::iterator iter = mFMap.find(key);
+	map<DataKey, float>::iterator iter = m_FltMap.find(key);
 	float toReturn = -1;
 
-	if (iter != mFMap.end())
+	if (iter != m_FltMap.end())
 	{
 		return  iter->second;
 	}
@@ -85,11 +100,11 @@ float DataLoader::getFloat(const DataKey& key)
 
 Point DataLoader::getPoint(const DataKey& key1, const DataKey& key2)
 {
-	map<DataKey, int>::iterator iter1 = mIMap.find(key1);
-	map<DataKey, int>::iterator iter2 = mIMap.find(key2);
+	map<DataKey, int>::iterator iter1 = m_IntMap.find(key1);
+	map<DataKey, int>::iterator iter2 = m_IntMap.find(key2);
 	Point toReturn{ 0, 0 };
 
-	if (iter1 != mIMap.end() && iter2 != mIMap.end())
+	if (iter1 != m_IntMap.end() && iter2 != m_IntMap.end())
 	{
 		toReturn.x = static_cast<int>(iter1->second);
 		toReturn.y = static_cast<int>(iter2->second);
@@ -102,75 +117,218 @@ void DataLoader::loadTextData(const string& filename)
 {
 	BENCH_START();
 
-	ifstream loadFile;
-	loadFile.open(filename);
+	ifstream file;
+	file.open(filename);
 
-	if (loadFile.good())
+	if (file.good())
 	{
-		while (!loadFile.eof())
+		while (!file.eof())
 		{
-			string key;
-			string toAdds, junk;
-			int toAddi;
-			float toAddf;
 			char typeID;
+			string key, junk;
 
-			loadFile >> typeID;
+			file >> typeID;
 
+			// load string
 			if (typeID == 's')
-			{//load string
-				loadFile >> key >> toAdds;
+			{
+				string value;
+				file >> key >> value;
 
-				map<DataKey, string>::iterator iter = mSMap.find(key);
-				if (iter == mSMap.end())
+				auto iter = m_StrMap.find(key);
+				if (iter == m_StrMap.end())
 				{
-					mSMap[key] = toAdds;
+					m_StrMap[key] = value;
 				}
 
 
 			}
-
+			// load int
 			else if (typeID == 'i')
-			{//load int
-				loadFile >> key >> toAddi;
+			{
+				int value;
+				file >> key >> value;
 
-				map<DataKey, int>::iterator iter = mIMap.find(key);
-				if (iter == mIMap.end())
+				auto iter = m_IntMap.find(key);
+				if (iter == m_IntMap.end())
 				{
-					mIMap[key] = toAddi;
+					m_IntMap[key] = value;
 				}
 			}
-
+			// load float
 			else if (typeID == 'f')
-			{//load float
-				loadFile >> key >> toAddf;
+			{
+				float value;
+				file >> key >> value;
 
-				map<DataKey, float>::iterator iter = mFMap.find(key);
-				if (iter == mFMap.end())
+				auto iter = m_FltMap.find(key);
+				if (iter == m_FltMap.end())
 				{
-					mFMap[key] = toAddf;
+					m_FltMap[key] = value;
 				}
 			}
-
+			//  Skip line
 			else
 			{
-				getline(loadFile, junk);
+				getline(file, junk);
 			}
 
-		}//end while loop
+		}
 	}
-
-	else //File couldnt Open
+	// File couldn't Open
+	else 
 	{
-		cout << "Could not open data file";
+		die("Could not open data file");
 	}
 
-	loadFile.close();
+	file.close();
 
 	BENCH_PRINT("DataLoader::loadTextData");
 }
 
 void DataLoader::loadBinaryData(const string& filename)
 {
+	BENCH_START();
 
+	ifstream file;
+	file.open(filename, ifstream::binary);
+
+	if (file.good())
+	{
+		while (!file.eof())
+		{
+			const byte& typeID = readBinaryByte(file);
+
+			// load string
+			if (typeID == 's') 
+			{ 
+				const string& key = readBinaryString(file);
+				const string& value = readBinaryString(file);
+
+				auto iter = m_StrMap.find(key);
+				if (iter == m_StrMap.end())
+				{
+					m_StrMap[key] = value;
+				}
+			}
+			// load int
+			else if (typeID == 'i')
+			{
+				const string& key = readBinaryString(file);
+				const int& value = readBinaryInt(file);
+
+				auto iter = m_IntMap.find(key);
+				if (iter == m_IntMap.end())
+				{
+					m_IntMap[key] = value;
+				}
+			}
+			// load float
+			else if (typeID == 'f')
+			{
+				const string& key = readBinaryString(file);
+				const float& value = readBinaryFloat(file);
+
+				auto iter = m_FltMap.find(key);
+				if (iter == m_FltMap.end())
+				{
+					m_FltMap[key] = value;
+				}
+			}
+		}
+	}
+	// File couldn't Open
+	else 
+	{
+		die("Could not open data file");
+	}
+
+	file.close();
+
+	BENCH_PRINT("DataLoader::loadBinaryData");
+}
+
+void DataLoader::saveTextData(const string& filename)
+{
+	BENCH_START();
+
+	ofstream file;
+	file.open(filename);
+
+	if (file.good())
+	{
+		for (auto iter = m_StrMap.cbegin(); iter != m_StrMap.cend(); ++iter) {
+			file << "s " << iter->first << " " << iter->second << "\n";
+		}
+
+		for (auto iter = m_IntMap.cbegin(); iter != m_IntMap.cend(); ++iter) {
+			file << "i " << iter->first << " " << iter->second << "\n";
+		}
+
+		for (auto iter = m_FltMap.cbegin(); iter != m_FltMap.cend(); ++iter) {
+			file << "f " << iter->first << " " << iter->second << "\n";
+		}
+	}
+	// File couldn't Open
+	else 
+	{
+		die("Could not open data file");
+	}
+
+	file.close();
+
+	BENCH_PRINT("DataLoader::saveTextData");
+}
+
+void DataLoader::saveBinaryData(const string& filename)
+{
+	BENCH_START();
+
+	ofstream file;
+	file.open(filename, ofstream::binary);
+
+	if (file.good())
+	{
+		for (auto iter = m_StrMap.cbegin(); iter != m_StrMap.cend(); ++iter) {
+			writeBinaryByte(file, 's');
+			writeBinaryString(file, iter->first);
+			writeBinaryString(file, iter->second);
+		}
+
+		for (auto iter = m_IntMap.cbegin(); iter != m_IntMap.cend(); ++iter) {
+			writeBinaryByte(file, 'i');
+			writeBinaryString(file, iter->first);
+			writeBinaryInt(file, iter->second);
+		}
+
+		for (auto iter = m_FltMap.cbegin(); iter != m_FltMap.cend(); ++iter) {
+			writeBinaryByte(file, 'f');
+			writeBinaryString(file, iter->first);
+			writeBinaryFloat(file, iter->second);
+		}
+	}
+	// File couldn't Open
+	else
+	{
+		die("Could not open data file");
+	}
+
+	file.close();
+
+	BENCH_PRINT("DataLoader::saveBinaryData");
+}
+
+void DataLoader::printAll(void)
+{
+	for (auto iter = m_StrMap.cbegin(); iter != m_StrMap.cend(); ++iter) {
+		std::cout << "s " << iter->first << " " << iter->second << "\n";
+	}
+
+	for (auto iter = m_IntMap.cbegin(); iter != m_IntMap.cend(); ++iter) {
+		std::cout << "i " << iter->first << " " << iter->second << "\n";
+	}
+
+	for (auto iter = m_FltMap.cbegin(); iter != m_FltMap.cend(); ++iter) {
+		std::cout << "f " << iter->first << " " << iter->second << "\n";
+	}
 }

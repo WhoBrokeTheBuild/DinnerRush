@@ -31,7 +31,11 @@ Program::Program(void) :
 	}
 
 	mp_DataLoader = new DataLoader();
-	mp_DataLoader->loadData("GameData.txt");
+	mp_DataLoader->loadData("GameData.bin");
+	
+	mp_DataLoader->saveData("GameData.out.txt");
+	mp_DataLoader->saveData("GameData.out.bin");
+
 	mp_MainFont = new Font(getDataLoader()->getString("AssetPath") + getDataLoader()->getString("MainFont"), 50);
 
 	BENCH_PRINT("Program::ctor");
