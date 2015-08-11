@@ -7,6 +7,8 @@
 
 void pause(void);
 
-void die(string msg);
+void die(const string& msg);
+
+string getFileExt(const string& filename);
 
 #endif // UTIL_H

@@ -65,6 +65,9 @@
     <ClInclude Include="DataLoader.h">
       <Filter>Project\Utility</Filter>
     </ClInclude>
+    <ClInclude Include="Benchmark.h">
+      <Filter>Project\Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="GameData.txt">

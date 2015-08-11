@@ -4,6 +4,8 @@
 #include "Util.h"
 #include "DataLoader.h"
 
+#include "Benchmark.h"
+
 Program * Program::sp_Instance = nullptr;
 
 Program* Program::Inst(void)
@@ -18,6 +20,8 @@ Program::Program(void) :
 	mp_Window(nullptr),
 	mp_Renderer(nullptr)
 {
+	BENCH_START();
+
 	if (SDL_Init(SDL_INIT_VIDEO)) {
 		die("Failed to initialize SDL");
 	}
@@ -25,24 +29,24 @@ Program::Program(void) :
 	if (TTF_Init()) {
 		die("Failed to initialize SDL TTF");
 	}
+
+	mp_DataLoader = new DataLoader();
+	mp_DataLoader->loadData("GameData.txt");
+	mp_MainFont = new Font(getDataLoader()->getString("AssetPath") + getDataLoader()->getString("MainFont"), 50);
+
+	BENCH_PRINT("Program::ctor");
 }
 
 Program::~Program(void)
 {
+	delete mp_DataLoader;
+
 	TTF_Quit();
 	SDL_Quit();
 }
 
-void Program::init(void)
-{
-	gpDataLoader = new DataLoader();
-	gpDataLoader->loadInfo();
-	mp_MainFont = new Font(gpDataLoader->getString("AssetPath") + gpDataLoader->getString("MainFont"), 50);
-}
-
 void Program::run(void)
 {
-	init();
 	createWindow();
 
 	bool running = true;
@@ -72,6 +76,8 @@ void Program::run(void)
 
 void Program::createWindow(void)
 {
+	BENCH_START();
+
 	mp_Window = SDL_CreateWindow(
 		"Dinner Rush - A Pathing AI Test",
 		SDL_WINDOWPOS_CENTERED,
@@ -86,12 +92,18 @@ void Program::createWindow(void)
 	}
 
 	mp_Renderer = SDL_CreateRenderer(mp_Window, -1, SDL_RENDERER_ACCELERATED);
+
+	BENCH_PRINT("Program::createWindow");
 }
 
 void Program::destroyWindow(void)
 {
+	BENCH_START();
+
 	SDL_DestroyRenderer(mp_Renderer);
 	SDL_DestroyWindow(mp_Window);
+
+	BENCH_PRINT("Program::destroyWindow");
 }
 
 void Program::update(void)
@@ -110,6 +122,11 @@ void Program::render(void)
 	delete pTex;
 
 	SDL_RenderPresent(getSDLRenderer());
+}
+
+DataLoader* Program::getDataLoader(void)
+{
+	return mp_DataLoader;
 }
 
 SDL_Window* Program::getSDLWindow(void)

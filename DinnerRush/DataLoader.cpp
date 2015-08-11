@@ -1,8 +1,9 @@
 #include "DataLoader.h"
-#include<fstream>
-#include<iostream>
+#include <fstream>
+#include <iostream>
 
-DataLoader* gpDataLoader = NULL;
+#include "Util.h"
+#include "Benchmark.h"
 
 DataLoader::DataLoader()
 {
@@ -16,72 +17,17 @@ DataLoader::~DataLoader()
 	mFMap.clear();
 }
 
-void DataLoader::loadInfo()
+void DataLoader::loadData(const string& filename)
 {
-	ifstream loadFile;
-	loadFile.open(INFO_SHEET_LOC);
+	const string& ext = getFileExt(filename);
 
-	if (loadFile.good())
-	{
-		while (!loadFile.eof())
-		{
-			string key;
-			string toAdds, junk;
-			int toAddi;
-			float toAddf;
-			char typeID;
-
-			loadFile >> typeID;
-
-			if (typeID == 's')
-			{//load string
-				loadFile >> key >> toAdds;
-				
-				map<DataKey, string>::iterator iter = mSMap.find(key);
-				if (iter == mSMap.end())
-				{
-					mSMap[key] = toAdds;
-				}
-
-				
-			}
-
-			else if (typeID == 'i')
-			{//load int
-				loadFile >> key >> toAddi;
-
-				map<DataKey, int>::iterator iter = mIMap.find(key);
-				if (iter == mIMap.end())
-				{
-					mIMap[key] = toAddi;
-				}
-			}
-
-			else if (typeID == 'f')
-			{//load float
-				loadFile >> key >> toAddf;
-
-				map<DataKey, float>::iterator iter = mFMap.find(key);
-				if (iter == mFMap.end())
-				{
-					mFMap[key] = toAddf;
-				}
-			}
-
-			else
-			{
-				getline(loadFile, junk);
-			}
-
-		}//end while loop
+	if (ext == "txt") {
+		loadTextData(filename);
+	}
+	else if (ext == "bin") {
+		loadBinaryData(filename);
 	}
 
-	else //File couldnt Open
-	{
-		cout << "Could not open data file";
-	}
-
-	loadFile.close();
 }
 
 int DataLoader::getInt(const DataKey& key)
@@ -137,21 +83,94 @@ float DataLoader::getFloat(const DataKey& key)
 	return toReturn;
 }
 
-//For later when point/vector added
-/*
-
-Vector2D DataLoader::getAsVector(const DataKey& key1, const DataKey& key2)
+Point DataLoader::getPoint(const DataKey& key1, const DataKey& key2)
 {
-map<DataKey, int>::iterator iter1 = mIMap.find(key1);
-map<DataKey, int>::iterator iter2 = mIMap.find(key2);
-Vector2D toReturn(0, 0);
+	map<DataKey, int>::iterator iter1 = mIMap.find(key1);
+	map<DataKey, int>::iterator iter2 = mIMap.find(key2);
+	Point toReturn{ 0, 0 };
 
-if (iter1 != mIMap.end() && iter2 != mIMap.end())
-{
-toReturn.setX(static_cast<float>(iter1->second));
-toReturn.setY(static_cast<float>(iter2->second));
+	if (iter1 != mIMap.end() && iter2 != mIMap.end())
+	{
+		toReturn.x = static_cast<int>(iter1->second);
+		toReturn.y = static_cast<int>(iter2->second);
+	}
+
+	return toReturn;
 }
 
-return toReturn;
+void DataLoader::loadTextData(const string& filename)
+{
+	BENCH_START();
+
+	ifstream loadFile;
+	loadFile.open(filename);
+
+	if (loadFile.good())
+	{
+		while (!loadFile.eof())
+		{
+			string key;
+			string toAdds, junk;
+			int toAddi;
+			float toAddf;
+			char typeID;
+
+			loadFile >> typeID;
+
+			if (typeID == 's')
+			{//load string
+				loadFile >> key >> toAdds;
+
+				map<DataKey, string>::iterator iter = mSMap.find(key);
+				if (iter == mSMap.end())
+				{
+					mSMap[key] = toAdds;
+				}
+
+
+			}
+
+			else if (typeID == 'i')
+			{//load int
+				loadFile >> key >> toAddi;
+
+				map<DataKey, int>::iterator iter = mIMap.find(key);
+				if (iter == mIMap.end())
+				{
+					mIMap[key] = toAddi;
+				}
+			}
+
+			else if (typeID == 'f')
+			{//load float
+				loadFile >> key >> toAddf;
+
+				map<DataKey, float>::iterator iter = mFMap.find(key);
+				if (iter == mFMap.end())
+				{
+					mFMap[key] = toAddf;
+				}
+			}
+
+			else
+			{
+				getline(loadFile, junk);
+			}
+
+		}//end while loop
+	}
+
+	else //File couldnt Open
+	{
+		cout << "Could not open data file";
+	}
+
+	loadFile.close();
+
+	BENCH_PRINT("DataLoader::loadTextData");
 }
-*/
+
+void DataLoader::loadBinaryData(const string& filename)
+{
+
+}
