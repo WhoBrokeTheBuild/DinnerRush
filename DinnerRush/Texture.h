@@ -18,7 +18,7 @@ public:
 
 	void render(SDL_Renderer* pRenderer, int x, int y);
 
-	SDL_Texture* getSDLTexture();
+	SDL_Texture* getSDLTexture(void) const;
 
 private:
 

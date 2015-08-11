@@ -142,6 +142,7 @@
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Program.cpp" />
+    <ClCompile Include="RenderedTextBuffer.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Unit.cpp" />
@@ -152,8 +153,10 @@
     <ClInclude Include="DataLoader.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="Program.h" />
+    <ClInclude Include="RenderedTextBuffer.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="TimeInfo.h" />
     <ClInclude Include="Types.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="Util.h" />

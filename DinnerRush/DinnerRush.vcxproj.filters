@@ -13,6 +13,9 @@
     <Filter Include="Project\Units">
       <UniqueIdentifier>{b435e1de-242a-4ce3-a4bc-a54b9e337e3f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\Timing">
+      <UniqueIdentifier>{57cf2c22-1c25-45c2-aba6-40df10f92da8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -38,6 +41,9 @@
     </ClCompile>
     <ClCompile Include="DataLoader.cpp">
       <Filter>Project\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderedTextBuffer.cpp">
+      <Filter>Project\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +73,12 @@
     </ClInclude>
     <ClInclude Include="Benchmark.h">
       <Filter>Project\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderedTextBuffer.h">
+      <Filter>Project\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeInfo.h">
+      <Filter>Project\Timing</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

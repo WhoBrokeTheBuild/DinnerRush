@@ -33,7 +33,7 @@ void DataLoader::loadData(const string& filename)
 
 }
 
-void DataLoader::saveData(const string& filename)
+void DataLoader::saveData(const string& filename) const
 {
 	const string& ext = getFileExt(filename);
 
@@ -45,9 +45,9 @@ void DataLoader::saveData(const string& filename)
 	}
 }
 
-int DataLoader::getInt(const DataKey& key)
+int DataLoader::getInt(const DataKey& key) const
 {
-	map<DataKey, int>::iterator iter = m_IntMap.find(key);
+	auto iter = m_IntMap.find(key);
 	int toReturn = -1;
 
 	if (iter != m_IntMap.end())
@@ -58,9 +58,9 @@ int DataLoader::getInt(const DataKey& key)
 	return toReturn;
 }
 
-string DataLoader::getString(const DataKey& key)
+string DataLoader::getString(const DataKey& key) const
 {
-	map<DataKey, string>::iterator iter = m_StrMap.find(key);
+	auto iter = m_StrMap.find(key);
 	string toReturn = "_";
 
 	if (iter != m_StrMap.end())
@@ -71,9 +71,9 @@ string DataLoader::getString(const DataKey& key)
 	return toReturn;
 }
 
-string DataLoader::getAsset(const DataKey& key)
+string DataLoader::getAsset(const DataKey& key) const
 {
-	map<DataKey, string>::iterator iter = m_StrMap.find(key);
+	auto iter = m_StrMap.find(key);
 	string path = getString("AssetPath");
 	string toReturn = "_";
 
@@ -85,9 +85,9 @@ string DataLoader::getAsset(const DataKey& key)
 	return toReturn;
 }
 
-float DataLoader::getFloat(const DataKey& key)
+float DataLoader::getFloat(const DataKey& key) const
 {
-	map<DataKey, float>::iterator iter = m_FltMap.find(key);
+	auto iter = m_FltMap.find(key);
 	float toReturn = -1;
 
 	if (iter != m_FltMap.end())
@@ -98,16 +98,16 @@ float DataLoader::getFloat(const DataKey& key)
 	return toReturn;
 }
 
-Point DataLoader::getPoint(const DataKey& key1, const DataKey& key2)
+Point DataLoader::getPoint(const DataKey& key1, const DataKey& key2) const
 {
-	map<DataKey, int>::iterator iter1 = m_IntMap.find(key1);
-	map<DataKey, int>::iterator iter2 = m_IntMap.find(key2);
+	auto iter1 = m_IntMap.find(key1);
+	auto iter2 = m_IntMap.find(key2);
 	Point toReturn{ 0, 0 };
 
 	if (iter1 != m_IntMap.end() && iter2 != m_IntMap.end())
 	{
-		toReturn.x = static_cast<int>(iter1->second);
-		toReturn.y = static_cast<int>(iter2->second);
+		toReturn.x = iter1->second;
+		toReturn.y = iter2->second;
 	}
 
 	return toReturn;
@@ -248,7 +248,7 @@ void DataLoader::loadBinaryData(const string& filename)
 	BENCH_PRINT("DataLoader::loadBinaryData");
 }
 
-void DataLoader::saveTextData(const string& filename)
+void DataLoader::saveTextData(const string& filename) const
 {
 	BENCH_START();
 
@@ -280,7 +280,7 @@ void DataLoader::saveTextData(const string& filename)
 	BENCH_PRINT("DataLoader::saveTextData");
 }
 
-void DataLoader::saveBinaryData(const string& filename)
+void DataLoader::saveBinaryData(const string& filename) const
 {
 	BENCH_START();
 
@@ -318,7 +318,7 @@ void DataLoader::saveBinaryData(const string& filename)
 	BENCH_PRINT("DataLoader::saveBinaryData");
 }
 
-void DataLoader::printAll(void)
+void DataLoader::printAll(void) const
 {
 	for (auto iter = m_StrMap.cbegin(); iter != m_StrMap.cend(); ++iter) {
 		std::cout << "s " << iter->first << " " << iter->second << "\n";

@@ -15,23 +15,23 @@ public:
 	~DataLoader();
 
 	void loadData(const string& filename);
-	void saveData(const string& filename);
+	void saveData(const string& filename) const;
 
-	void printAll(void);
+	void printAll(void) const;
 
-	int	   getInt   (const DataKey& key);
-	float  getFloat (const DataKey& key);
-	string getString(const DataKey& key);
-	string getAsset (const DataKey& key);
-	Point  getPoint (const DataKey& key1, const DataKey& key2);
+	int	   getInt   (const DataKey& key) const;
+	float  getFloat (const DataKey& key) const;
+	string getString(const DataKey& key) const;
+	string getAsset (const DataKey& key) const;
+	Point  getPoint (const DataKey& key1, const DataKey& key2) const;
 
 private:
 
 	void loadTextData  (const string& filename);
 	void loadBinaryData(const string& filename);
 
-	void saveTextData  (const string& filename);
-	void saveBinaryData(const string& filename);
+	void saveTextData  (const string& filename) const;
+	void saveBinaryData(const string& filename) const;
 
 	map<DataKey, string>	m_StrMap; // Map for string data
 	map<DataKey, int>		m_IntMap; // Map for int data 

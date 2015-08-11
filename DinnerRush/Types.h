@@ -15,5 +15,6 @@ using std::map;
 typedef unsigned char byte;
 typedef SDL_Point Point;
 typedef SDL_Rect Rect;
+typedef SDL_Color Color;
 
 #endif // TYPES_H
