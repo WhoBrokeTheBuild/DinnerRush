@@ -19,6 +19,9 @@
     <Filter Include="Project\Input">
       <UniqueIdentifier>{99bf6782-9187-44d2-be16-27a1ebc42eb5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\Event">
+      <UniqueIdentifier>{a25cb9d3-6505-4087-982a-050c7dac5098}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -48,17 +51,17 @@
     <ClCompile Include="RenderedTextBuffer.cpp">
       <Filter>Project\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Event.cpp">
-      <Filter>Project\Input</Filter>
-    </ClCompile>
-    <ClCompile Include="EventListener.cpp">
-      <Filter>Project\Input</Filter>
-    </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>Project\Input</Filter>
     </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>Project\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="EventListener.cpp">
+      <Filter>Project\Event</Filter>
+    </ClCompile>
     <ClCompile Include="EventSystem.cpp">
-      <Filter>Project\Input</Filter>
+      <Filter>Project\Event</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -98,20 +101,20 @@
     <ClInclude Include="CloseProgramEvent.h">
       <Filter>Project\Input</Filter>
     </ClInclude>
-    <ClInclude Include="Event.h">
-      <Filter>Project\Input</Filter>
-    </ClInclude>
-    <ClInclude Include="EventListener.h">
-      <Filter>Project\Input</Filter>
-    </ClInclude>
     <ClInclude Include="InputManager.h">
       <Filter>Project\Input</Filter>
     </ClInclude>
     <ClInclude Include="ToggleFpsEvent.h">
       <Filter>Project\Input</Filter>
     </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Project\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="EventListener.h">
+      <Filter>Project\Event</Filter>
+    </ClInclude>
     <ClInclude Include="EventSystem.h">
-      <Filter>Project\Input</Filter>
+      <Filter>Project\Event</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
