@@ -12,6 +12,7 @@
 #include "Font.h"
 #include "Texture.h"
 #include "RenderedTextBuffer.h"
+#include "InputManager.h"
 
 Program * Program::sp_Instance = nullptr;
 
@@ -49,6 +50,9 @@ Program::Program(void) :
 
 Program::~Program(void)
 {
+	delete mp_InputManager;
+	mp_InputManager = NULL;
+
 	TTF_Quit();
 	SDL_Quit();
 }
@@ -71,6 +75,8 @@ void Program::init(void)
 	mp_TextBuffer = new RenderedTextBuffer(mp_MainFont, "Hello, World!", Color{ 255, 255, 255, 255 });
 
 	BENCH_PRINT("Program::init");
+
+	mp_InputManager = new InputManager;
 }
 
 void Program::term(void)

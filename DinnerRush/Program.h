@@ -9,6 +9,7 @@ class TimeInfo;
 class DataLoader;
 class Font;
 class RenderedTextBuffer;
+class InputManager;
 
 struct SDL_Window;
 struct SDL_Renderer;
@@ -52,6 +53,8 @@ private:
 					m_UpdateInterval;
 
 	DataLoader		*mp_DataLoader;
+
+	InputManager    *mp_InputManager;
 
 	SDL_Window		*mp_Window;
 	SDL_Renderer	*mp_Renderer;
