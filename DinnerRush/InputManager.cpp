@@ -37,9 +37,8 @@ void InputManager::checkKeyboard()
 		gpEventSystem->fireEvent(CloseProgramEvent());
 
 	if (KeyDown::checkFpsDown())
-	{
 		gpEventSystem->fireEvent(ToggleFpsEvent());
-	}
+
 
 
 

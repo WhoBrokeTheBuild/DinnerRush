@@ -125,6 +125,7 @@ void Program::run(void)
 
 		if (secsSinceLastFrame >= m_UpdateInterval) {
 			render();
+			mp_InputManager->update();
 			++frameCount;
 			m_CurrentFPS = (m_UpdateInterval / secsSinceLastFrame) * m_TargetFPS;
 			

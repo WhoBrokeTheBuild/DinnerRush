@@ -75,6 +75,9 @@
     <ClCompile Include="Unit.cpp">
       <Filter>Project\Units</Filter>
     </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Project\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Util.h">
@@ -139,6 +142,9 @@
     </ClInclude>
     <ClInclude Include="Unit.h">
       <Filter>Project\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Project\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -43,6 +43,8 @@ public:
 
 	double getActualFPS() const { return m_CurrentFPS; }
 
+	//Add handleEvent
+
 	DataLoader* getDataLoader(void) const;
 
 	SDL_Window* getSDLWindow(void) const;
