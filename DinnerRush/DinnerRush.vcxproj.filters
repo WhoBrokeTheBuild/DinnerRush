@@ -10,6 +10,12 @@
     <Filter Include="Project\Graphics">
       <UniqueIdentifier>{055e3f10-3589-48b8-97da-3d8daea8c5a7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\Tracking">
+      <UniqueIdentifier>{b64442c1-7d64-4166-9736-48692accfc91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Collections">
+      <UniqueIdentifier>{ab0db740-a487-4c1a-bfc4-5d32af3cb77d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -30,6 +36,12 @@
     <ClCompile Include="Font.cpp">
       <Filter>Project\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="MemoryTracker.cpp">
+      <Filter>Project\Tracking</Filter>
+    </ClCompile>
+    <ClCompile Include="TrackedObject.cpp">
+      <Filter>Project\Tracking</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Util.h">
@@ -49,6 +61,18 @@
     </ClInclude>
     <ClInclude Include="Font.h">
       <Filter>Project\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="MemoryTracker.h">
+      <Filter>Project\Tracking</Filter>
+    </ClInclude>
+    <ClInclude Include="TrackedObject.h">
+      <Filter>Project\Tracking</Filter>
+    </ClInclude>
+    <ClInclude Include="ArrayList.h">
+      <Filter>Project\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Project\Collections</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

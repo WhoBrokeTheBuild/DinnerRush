@@ -8,7 +8,7 @@ Program * Program::sp_Instance = nullptr;
 Program* Program::Inst(void)
 {
 	if (sp_Instance == nullptr) {
-		sp_Instance = new Program();
+		sp_Instance = New Program();
 	}
 	return sp_Instance;
 }
@@ -34,9 +34,8 @@ Program::~Program(void)
 
 void Program::run(void)
 {
+	load();
 	createWindow();
-
-	mp_MainFont = new Font("../Assets/Roboto.ttf", 50);
 
 	bool running = true;
 
@@ -58,9 +57,18 @@ void Program::run(void)
 		SDL_Delay(16);
 	}
 
-	delete mp_MainFont;
-
 	destroyWindow();
+	unload();
+}
+
+void Program::load(void)
+{
+	mp_MainFont = New Font("../Assets/Roboto.ttf", 50);
+}
+
+void Program::unload(void)
+{
+	delete mp_MainFont;
 }
 
 void Program::createWindow(void)

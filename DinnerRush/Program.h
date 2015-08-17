@@ -3,12 +3,14 @@
 #ifndef PROGRAM_H
 #define PROGRAM_H
 
+#include "TrackedObject.h"
 #include "Types.h"
 #include <SDL.h>
 
 #include "Font.h"
 
-class Program
+class Program :
+	public TrackedObject
 {
 public:
 
@@ -17,7 +19,12 @@ public:
 	Program(void);
 	~Program(void);
 
+	virtual inline string getClassName(void) const { return "Program"; }
+
 	void run(void);
+
+	void load(void);
+	void unload(void);
 
 	void createWindow(void);
 	void destroyWindow(void);
