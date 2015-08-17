@@ -3,14 +3,18 @@
 #ifndef PROGRAM_H
 #define PROGRAM_H
 
-#include "TrackedObject.h"
 #include "Types.h"
-#include <SDL.h>
 
-#include "Font.h"
+class TimeInfo;
+class DataLoader;
+class Font;
+class RenderedTextBuffer;
+class InputManager;
 
-class Program :
-	public TrackedObject
+struct SDL_Window;
+struct SDL_Renderer;
+
+class Program
 {
 public:
 
@@ -19,30 +23,44 @@ public:
 	Program(void);
 	~Program(void);
 
-	virtual inline string getClassName(void) const { return "Program"; }
+	void init(void);
+	void term(void);
 
 	void run(void);
-
-	void load(void);
-	void unload(void);
 
 	void createWindow(void);
 	void destroyWindow(void);
 
-	void update(void);
+	void update(TimeInfo& timeInfo);
 	void render(void);
 
-	SDL_Window* getSDLWindow(void);
-	SDL_Renderer* getSDLRenderer(void);
+	double getTargetFPS() const { return m_TargetFPS; }
+	void setTargetFPS(double fps);
+
+	double getActualFPS() const { return m_CurrentFPS; }
+
+	DataLoader* getDataLoader(void) const;
+
+	SDL_Window* getSDLWindow(void) const;
+	SDL_Renderer* getSDLRenderer(void) const;
 
 private:
 
-	static Program *sp_Instance;
+	static Program	*sp_Instance;
+
+	double			m_TargetFPS,
+					m_CurrentFPS,
+					m_UpdateInterval;
+
+	DataLoader		*mp_DataLoader;
+
+	InputManager    *mp_InputManager;
 
 	SDL_Window		*mp_Window;
-	SDL_Renderer    *mp_Renderer;
+	SDL_Renderer	*mp_Renderer;
 
-	Font *mp_MainFont;
+	Font				*mp_MainFont;
+	RenderedTextBuffer	*mp_TextBuffer;
 
 }; // Program
 

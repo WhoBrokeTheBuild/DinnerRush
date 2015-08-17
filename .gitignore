@@ -210,3 +210,5 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+/DinnerRush/GameData.out.bin
+/DinnerRush/GameData.out.txt

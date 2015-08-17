@@ -10,11 +10,17 @@
     <Filter Include="Project\Graphics">
       <UniqueIdentifier>{055e3f10-3589-48b8-97da-3d8daea8c5a7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Project\Tracking">
-      <UniqueIdentifier>{b64442c1-7d64-4166-9736-48692accfc91}</UniqueIdentifier>
+    <Filter Include="Project\Units">
+      <UniqueIdentifier>{b435e1de-242a-4ce3-a4bc-a54b9e337e3f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Project\Collections">
-      <UniqueIdentifier>{ab0db740-a487-4c1a-bfc4-5d32af3cb77d}</UniqueIdentifier>
+    <Filter Include="Project\Timing">
+      <UniqueIdentifier>{57cf2c22-1c25-45c2-aba6-40df10f92da8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Input">
+      <UniqueIdentifier>{99bf6782-9187-44d2-be16-27a1ebc42eb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Event">
+      <UniqueIdentifier>{a25cb9d3-6505-4087-982a-050c7dac5098}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -36,11 +42,26 @@
     <ClCompile Include="Font.cpp">
       <Filter>Project\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="MemoryTracker.cpp">
-      <Filter>Project\Tracking</Filter>
+    <ClCompile Include="Unit.cpp">
+      <Filter>Project\Units</Filter>
     </ClCompile>
-    <ClCompile Include="TrackedObject.cpp">
-      <Filter>Project\Tracking</Filter>
+    <ClCompile Include="DataLoader.cpp">
+      <Filter>Project\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderedTextBuffer.cpp">
+      <Filter>Project\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Project\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>Project\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="EventListener.cpp">
+      <Filter>Project\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="EventSystem.cpp">
+      <Filter>Project\Event</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -62,17 +83,43 @@
     <ClInclude Include="Font.h">
       <Filter>Project\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="MemoryTracker.h">
-      <Filter>Project\Tracking</Filter>
+    <ClInclude Include="Unit.h">
+      <Filter>Project\Units</Filter>
     </ClInclude>
-    <ClInclude Include="TrackedObject.h">
-      <Filter>Project\Tracking</Filter>
+    <ClInclude Include="DataLoader.h">
+      <Filter>Project\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="ArrayList.h">
-      <Filter>Project\Collections</Filter>
+    <ClInclude Include="Benchmark.h">
+      <Filter>Project\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="Map.h">
-      <Filter>Project\Collections</Filter>
+    <ClInclude Include="RenderedTextBuffer.h">
+      <Filter>Project\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="TimeInfo.h">
+      <Filter>Project\Timing</Filter>
+    </ClInclude>
+    <ClInclude Include="CloseProgramEvent.h">
+      <Filter>Project\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Project\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="ToggleFpsEvent.h">
+      <Filter>Project\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Project\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="EventListener.h">
+      <Filter>Project\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem.h">
+      <Filter>Project\Event</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="GameData.txt">
+      <Filter>Project\Utility</Filter>
+    </Text>
   </ItemGroup>
 </Project>

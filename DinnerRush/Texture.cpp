@@ -1,5 +1,6 @@
 #include "Texture.h"
 
+#include "Util.h"
 #include "Program.h"
 
 Texture::Texture(void) :
@@ -16,11 +17,19 @@ Texture::Texture(string filename) :
 
 	mp_Texture = SDL_CreateTextureFromSurface(Program::Inst()->getSDLRenderer(), surf);
 	SDL_FreeSurface(surf);
+
+	if (!mp_Texture) {
+		die("Failed to load texture from file");
+	}
 }
 
 Texture::Texture(SDL_Surface* pSurface)
 {
 	mp_Texture = SDL_CreateTextureFromSurface(Program::Inst()->getSDLRenderer(), pSurface);
+
+	if (!mp_Texture) {
+		die("Failed to load texture from SDL_Surface");
+	}
 }
 
 Texture::~Texture(void)
@@ -38,7 +47,7 @@ void Texture::render(SDL_Renderer* pRenderer, int x, int y)
 	SDL_RenderCopy(pRenderer, mp_Texture, nullptr, &dst);
 }
 
-SDL_Texture* Texture::getSDLTexture()
+SDL_Texture* Texture::getSDLTexture(void) const
 {
 	return mp_Texture;
 }

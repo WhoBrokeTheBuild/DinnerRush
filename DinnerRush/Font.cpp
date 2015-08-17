@@ -1,5 +1,8 @@
 #include "Font.h"
 
+#include <SDL_ttf.h>
+#include "Texture.h"
+
 Font::Font(string filename, int size) :
 	mp_Font(nullptr)
 {
