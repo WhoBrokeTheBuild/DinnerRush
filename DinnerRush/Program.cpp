@@ -19,7 +19,7 @@ Program * Program::sp_Instance = nullptr;
 Program* Program::Inst(void)
 {
 	if (sp_Instance == nullptr) {
-		sp_Instance = new Program();
+		sp_Instance = New Program();
 	}
 	return sp_Instance;
 }
@@ -65,18 +65,18 @@ void Program::init(void)
 
 	setTargetFPS(60.0);
 
-	mp_DataLoader = new DataLoader();
+	mp_DataLoader = New DataLoader();
 	mp_DataLoader->loadData("GameData.bin");
 
 	mp_DataLoader->saveData("GameData.out.txt");
 	mp_DataLoader->saveData("GameData.out.bin");
 
-	mp_MainFont = new Font(getDataLoader()->getString("AssetPath") + getDataLoader()->getString("MainFont"), 50);
-	mp_TextBuffer = new RenderedTextBuffer(mp_MainFont, "Hello, World!", Color{ 255, 255, 255, 255 });
+	mp_MainFont = New Font(getDataLoader()->getString("AssetPath") + getDataLoader()->getString("MainFont"), 50);
+	mp_TextBuffer = New RenderedTextBuffer(mp_MainFont, "Hello, World!", Color{ 255, 255, 255, 255 });
 
 	BENCH_PRINT("Program::init");
 
-	mp_InputManager = new InputManager;
+	mp_InputManager = New InputManager();
 }
 
 void Program::term(void)
@@ -180,7 +180,6 @@ void Program::destroyWindow(void)
 
 void Program::update(TimeInfo& timeInfo)
 {
-	std::cout << m_CurrentFPS << " " << timeInfo.Delta << std::endl;
 }
 
 void Program::render(void)

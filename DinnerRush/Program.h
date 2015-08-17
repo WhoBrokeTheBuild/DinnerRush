@@ -4,6 +4,7 @@
 #define PROGRAM_H
 
 #include "Types.h"
+#include "TrackedObject.h"
 
 class TimeInfo;
 class DataLoader;
@@ -14,7 +15,8 @@ class InputManager;
 struct SDL_Window;
 struct SDL_Renderer;
 
-class Program
+class Program :
+	public TrackedObject
 {
 public:
 
@@ -22,6 +24,8 @@ public:
 
 	Program(void);
 	~Program(void);
+
+	virtual inline string getClassName(void) const { return "Program"; }
 
 	void init(void);
 	void term(void);

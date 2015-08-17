@@ -3,16 +3,20 @@
 #ifndef DATA_LOADER_H
 #define DATA_LOADER_H
 
+#include "TrackedObject.h"
 #include "Types.h"
 
 typedef string DataKey;
 
-class DataLoader
+class DataLoader :
+	public TrackedObject
 {
 public:
 
 	DataLoader();
 	~DataLoader();
+
+	virtual inline string getClassName(void) const { return "Data Loader"; }
 
 	void loadData(const string& filename);
 	void saveData(const string& filename) const;

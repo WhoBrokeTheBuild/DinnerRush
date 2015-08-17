@@ -3,17 +3,21 @@
 #ifndef RENDERED_TEXT_BUFFER_H
 #define RENDERED_TEXT_BUFFER_H
 
+#include "TrackedObject.h"
 #include "Types.h"
 
 class Font;
 class Texture;
 
-class RenderedTextBuffer 
+class RenderedTextBuffer :
+	public TrackedObject
 {
 public:
 
 	RenderedTextBuffer(Font* font, const string& text, const Color& color);
 	~RenderedTextBuffer(void);
+
+	virtual inline string getClassName(void) const { return "Rendered Text Buffer"; }
 
 	string getText() const { return m_Text; }
 	void setText(string val);
