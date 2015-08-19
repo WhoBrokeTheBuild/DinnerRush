@@ -16,9 +16,6 @@
     <Filter Include="Project\Collections">
       <UniqueIdentifier>{ab0db740-a487-4c1a-bfc4-5d32af3cb77d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Project\Events">
-      <UniqueIdentifier>{d5abccc0-9c36-4c8a-94bc-ec14382275fb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Project\Input">
       <UniqueIdentifier>{0f947c39-5af6-49ef-986f-7cab58ca934a}</UniqueIdentifier>
     </Filter>
@@ -27,6 +24,12 @@
     </Filter>
     <Filter Include="Project\Units">
       <UniqueIdentifier>{97262524-3f5f-477d-bcf4-42760b801346}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Events">
+      <UniqueIdentifier>{14106788-6c18-42b5-a48e-01190208768e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Events\EventData">
+      <UniqueIdentifier>{90eaa58e-1fd5-4312-9a8c-db50138dcea4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -57,15 +60,6 @@
     <ClCompile Include="TrackedObject.cpp">
       <Filter>Project\Tracking</Filter>
     </ClCompile>
-    <ClCompile Include="Event.cpp">
-      <Filter>Project\Events</Filter>
-    </ClCompile>
-    <ClCompile Include="EventListener.cpp">
-      <Filter>Project\Events</Filter>
-    </ClCompile>
-    <ClCompile Include="EventSystem.cpp">
-      <Filter>Project\Events</Filter>
-    </ClCompile>
     <ClCompile Include="DataLoader.cpp">
       <Filter>Project\Utility</Filter>
     </ClCompile>
@@ -77,6 +71,12 @@
     </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>Project\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>Project\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="IEventDispatcher.cpp">
+      <Filter>Project\Events</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -101,9 +101,6 @@
     <ClInclude Include="Benchmark.h">
       <Filter>Project\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="CloseProgramEvent.h">
-      <Filter>Project\Events</Filter>
-    </ClInclude>
     <ClInclude Include="InputManager.h">
       <Filter>Project\Input</Filter>
     </ClInclude>
@@ -119,23 +116,11 @@
     <ClInclude Include="TrackedObject.h">
       <Filter>Project\Tracking</Filter>
     </ClInclude>
-    <ClInclude Include="Event.h">
-      <Filter>Project\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="EventListener.h">
-      <Filter>Project\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="EventSystem.h">
-      <Filter>Project\Events</Filter>
-    </ClInclude>
     <ClInclude Include="DataLoader.h">
       <Filter>Project\Utility</Filter>
     </ClInclude>
     <ClInclude Include="RenderedTextBuffer.h">
       <Filter>Project\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="ToggleFpsEvent.h">
-      <Filter>Project\Events</Filter>
     </ClInclude>
     <ClInclude Include="TimeInfo.h">
       <Filter>Project\Timing</Filter>
@@ -145,6 +130,21 @@
     </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>Project\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Callbacks.h">
+      <Filter>Project\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Delegate.h">
+      <Filter>Project\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Project\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="IEventDispatcher.h">
+      <Filter>Project\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="UpdateEventData.h">
+      <Filter>Project\Events\EventData</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

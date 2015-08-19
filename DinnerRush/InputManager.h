@@ -15,13 +15,7 @@ public:
 	static void update();
 	static void checkPrev();
 
-	static bool checkEscDown() { return (Esc && !EscP) ? true : false; };
-	static bool checkFpsDown() { return (Fps && !FpsP) ? true : false; };
-
 private:
-	//add keys here
-	static bool Fps, FpsP;
-	static bool Esc, EscP;
 };
 
 class InputManager :

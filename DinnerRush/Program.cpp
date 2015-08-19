@@ -13,8 +13,12 @@
 #include "Texture.h"
 #include "RenderedTextBuffer.h"
 #include "InputManager.h"
+#include "UpdateEventData.h"
 
 Program * Program::sp_Instance = nullptr;
+
+EventID Program::EVT_UPDATE = 0;
+EventID Program::EVT_RENDER = 1;
 
 Program* Program::Inst(void)
 {
@@ -30,10 +34,7 @@ Program::Program(void) :
 	m_UpdateInterval(),
 	mp_DataLoader(nullptr),
 	mp_Window(nullptr),
-	mp_Renderer(nullptr),
-
-	mp_MainFont(nullptr),
-	mp_TextBuffer(nullptr)
+	mp_Renderer(nullptr)
 {
 	BENCH_START();
 
@@ -71,20 +72,14 @@ void Program::init(void)
 	mp_DataLoader->saveData("GameData.out.txt");
 	mp_DataLoader->saveData("GameData.out.bin");
 
-	mp_MainFont = New Font(getDataLoader()->getString("AssetPath") + getDataLoader()->getString("MainFont"), 50);
-	mp_TextBuffer = New RenderedTextBuffer(mp_MainFont, "Hello, World!", Color{ 255, 255, 255, 255 });
+	mp_InputManager = New InputManager();
 
 	BENCH_PRINT("Program::init");
-
-	mp_InputManager = New InputManager();
 }
 
 void Program::term(void)
 {
 	BENCH_START();
-
-	delete mp_TextBuffer;
-	delete mp_MainFont;
 
 	delete mp_DataLoader;
 
@@ -128,7 +123,7 @@ void Program::run(void)
 			mp_InputManager->update();
 			++frameCount;
 			m_CurrentFPS = (m_UpdateInterval / secsSinceLastFrame) * m_TargetFPS;
-			
+
 			secsSinceLastFrame = 0;
 		}
 
@@ -158,7 +153,7 @@ void Program::createWindow(void)
 		1024,
 		768,
 		SDL_WINDOW_SHOWN
-	);
+		);
 
 	if (!mp_Window) {
 		die("Failed to create window");
@@ -181,13 +176,14 @@ void Program::destroyWindow(void)
 
 void Program::update(TimeInfo& timeInfo)
 {
+	dispatch(Event(EVT_UPDATE, UpdateEventData(timeInfo)));
 }
 
 void Program::render(void)
 {
 	SDL_RenderClear(getSDLRenderer());
 
-	mp_TextBuffer->getTexture()->render(getSDLRenderer(), 100, 100);
+	dispatch(Event(EVT_RENDER));
 
 	SDL_RenderPresent(getSDLRenderer());
 }

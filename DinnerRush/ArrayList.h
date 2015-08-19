@@ -208,7 +208,7 @@ private:
 template <class T>
 unsigned int ArrayList<T>::indexOf(const T& item) const
 {
-	if (IsEmpty())
+	if (isEmpty())
 		return -1;
 	auto it = find(cbegin(), cend(), item);
 	return (it == cend() ? -1 : it - cbegin());
@@ -220,7 +220,7 @@ bool ArrayList<T>::remove(const T& item)
 	for (auto it = begin(); it != end(); ++it)
 		if (*it == item)
 		{
-			Remove(it);
+			remove(it);
 			return true;
 		}
 	return false;

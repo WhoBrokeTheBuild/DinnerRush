@@ -1,31 +1,79 @@
-#pragma once
+#ifndef DUSK_EVENT_H
+#define DUSK_EVENT_H
 
+#include "TrackedObject.h"
 #include <string>
 
-using namespace std;
+using std::string;
 
-enum EventType
-{
-	INVALID_EVENT_TYPE = -1,
-	CLOSE_PROGRAM_EVENT,
-	TOGGLE_FPS_EVENT,
-	NUM_EVENT_TYPES //Keep this as the last
-};
+typedef unsigned int EventID;
 
-const string EVENT_NAMES[NUM_EVENT_TYPES] = {
-	"End_Game_Event",
-	"Toggle_FPS_Event",
-};
+class IEventDispatcher;
 
-class Event
+class EventData :
+	public TrackedObject
 {
 public:
-	Event(EventType type);
-	virtual ~Event();
 
-	EventType getType() const { return mType; };
-	const string& getEventName() const;
+    static const EventData BLANK_EVENT_DATA;
 
-private:
-	EventType mType;
-};
+    inline EventData( void ) { }
+    inline EventData( const EventData& rhs ) { }
+
+    virtual inline ~EventData( void ) { }
+
+    virtual inline string getClassName( void ) const { return "Event Data"; }
+
+    virtual EventData* clone( void ) const { return New EventData(); };
+
+}; // class EventData
+
+class Event :
+	public TrackedObject
+{
+public:
+
+    Event( const EventID& eventId, const EventData& data = EventData::BLANK_EVENT_DATA ) :
+        m_ID(eventId),
+        mp_Data(nullptr),
+        mp_EventTarget(nullptr)
+    {
+        mp_Data = data.clone();
+    }
+
+    Event( const Event& rhs ) :
+        m_ID(rhs.m_ID),
+        mp_Data(nullptr),
+        mp_EventTarget(nullptr)
+    {
+        mp_Data = (rhs.mp_Data == nullptr ? nullptr : rhs.mp_Data->clone() );
+    }
+
+    virtual inline ~Event( void )
+    {
+        delete mp_Data;
+    }
+
+    virtual inline string getClassName( void ) const { return "Event"; }
+
+    inline EventID getID( void ) const { return m_ID; }
+
+    inline IEventDispatcher* getTarget( void ) const { return mp_EventTarget; }
+    template <typename T>
+    inline T* getTargetAs( void ) const { return dynamic_cast<T*>(mp_EventTarget); }
+
+    inline void setTarget( IEventDispatcher* pTarget ) { mp_EventTarget = pTarget; }
+
+    inline EventData* getData( void ) const { return mp_Data; }
+    template <typename T>
+    inline T* getDataAs( void ) const { return dynamic_cast<T*>(mp_Data); }
+
+protected:
+
+    EventID             m_ID;
+    EventData*          mp_Data;
+    IEventDispatcher*   mp_EventTarget;
+
+}; // class Event
+
+#endif // DUSK_EVENT_H

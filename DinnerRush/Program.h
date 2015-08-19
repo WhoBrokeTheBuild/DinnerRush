@@ -4,6 +4,7 @@
 #define PROGRAM_H
 
 #include "Types.h"
+#include "IEventDispatcher.h"
 #include "TrackedObject.h"
 
 class TimeInfo;
@@ -16,9 +17,13 @@ struct SDL_Window;
 struct SDL_Renderer;
 
 class Program :
+	public IEventDispatcher,
 	public TrackedObject
 {
 public:
+
+	static EventID EVT_UPDATE;
+	static EventID EVT_RENDER;
 
 	static Program* Inst(void);
 
@@ -64,9 +69,6 @@ private:
 
 	SDL_Window		*mp_Window;
 	SDL_Renderer	*mp_Renderer;
-
-	Font				*mp_MainFont;
-	RenderedTextBuffer	*mp_TextBuffer;
 
 }; // Program
 

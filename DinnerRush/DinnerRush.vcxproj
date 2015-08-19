@@ -141,9 +141,8 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="DataLoader.cpp" />
     <ClCompile Include="Event.cpp" />
-    <ClCompile Include="EventListener.cpp" />
-    <ClCompile Include="EventSystem.cpp" />
     <ClCompile Include="Font.cpp" />
+    <ClCompile Include="IEventDispatcher.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MemoryTracker.cpp" />
@@ -159,12 +158,12 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="ArrayList.h" />
     <ClInclude Include="Benchmark.h" />
-    <ClInclude Include="CloseProgramEvent.h" />
+    <ClInclude Include="Callbacks.h" />
     <ClInclude Include="DataLoader.h" />
+    <ClInclude Include="Delegate.h" />
     <ClInclude Include="Event.h" />
-    <ClInclude Include="EventListener.h" />
-    <ClInclude Include="EventSystem.h" />
     <ClInclude Include="Font.h" />
+    <ClInclude Include="IEventDispatcher.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MemoryTracker.h" />
@@ -173,10 +172,10 @@
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TimeInfo.h" />
-    <ClInclude Include="ToggleFpsEvent.h" />
     <ClInclude Include="TrackedObject.h" />
     <ClInclude Include="Types.h" />
     <ClInclude Include="Unit.h" />
+    <ClInclude Include="UpdateEventData.h" />
     <ClInclude Include="Util.h" />
   </ItemGroup>
   <ItemGroup>

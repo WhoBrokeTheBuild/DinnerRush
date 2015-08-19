@@ -1,73 +1,74 @@
 #include "Animation.h"
-#include "EventSystem.h"
+#include "Event.h"
+#include "UpdateEventData.h"
 
-
-Animation::Animation()
+Animation::Animation(void) :
+	m_Speed(0),
+	m_CurrFrame(0),
+	m_FrameNum(0),
+	m_Loop(true),
+	mp_Sprites(nullptr),
+	m_MSUntilNextFrame()
 {
-	m_Fps = 0.5; m_CurrFrame = 0; m_FrameNum = 0;
-	m_Loop = true;
-	m_pSprites = NULL;
 
 }
-Animation::Animation(float fps, int totalFrames, bool loop)
+Animation::Animation(const float& speed, const int& totalFrames, const bool& loop) :
+	m_Speed(speed),
+	m_CurrFrame(0),
+	m_FrameNum(totalFrames),
+	m_Loop(loop),
+	mp_Sprites(nullptr),
+	m_MSUntilNextFrame(speed)
 {
-	m_Fps = fps;
-	m_CurrFrame = 0;
-	m_FrameNum = totalFrames;
-	m_Loop = loop;
-	m_pSprites = new Sprite*[totalFrames];
+	mp_Sprites = new Sprite*[totalFrames];
 }
 
-Animation::~Animation()
+Animation::~Animation(void)
 {
 	for (int i = 0; i < m_FrameNum; i++)
 	{
-		if (m_pSprites[i])
+		if (mp_Sprites[i])
 		{
-			delete m_pSprites[i];
-			m_pSprites[i] = NULL;
+			delete mp_Sprites[i];
+			mp_Sprites[i] = nullptr;
 		};
 	}
 	
-	if (m_pSprites)
+	if (mp_Sprites)
 	{
-		delete m_pSprites;
-		m_pSprites = NULL;
+		delete mp_Sprites;
+		mp_Sprites = nullptr;
 	}
 	
-	//If add timer to class DELETE TIMER K THNX :)
+	//If add timer to class DELETE TIMER KTHNXBAI :)
 
 }
 
 void Animation::addSprite(Sprite* sprite)
 {
-	m_pSprites[m_CurrFrame] = sprite;
+	mp_Sprites[m_CurrFrame] = sprite;
 	m_CurrFrame++;
 
 	if (m_CurrFrame >= m_FrameNum)
 		m_CurrFrame = 0;
 }
 
-Sprite* Animation::getSprite()
+Sprite* Animation::getSprite(void) const
 {
-	return m_pSprites[m_CurrFrame];
+	return mp_Sprites[m_CurrFrame];
 }
 
-void Animation::update()
+void Animation::update(const Event& evt)
 {
-	//TO DO ADD UPDATE it'll Look something like this
-	/*
-		if( AnimationPlaying || FPS == 0)
-		{
-			if(Timer is not running)
-				start timer
+	UpdateEventData* pData = evt.getDataAs<UpdateEventData>();
 
-			if(Timer->elapsedTime >= 1000 / fps
-			    Switch to next frame of animation
-		}
-	
-	*/
+	m_MSUntilNextFrame -= pData->getTimeInfo().ElapsedMilliseconds;
 
+	if (m_MSUntilNextFrame <= 0)
+	{
+		nextFrame();
+		m_MSUntilNextFrame = m_Speed;
+	}
 }
 
 void Animation::nextFrame()
