@@ -60,9 +60,6 @@
     <ClCompile Include="TrackedObject.cpp">
       <Filter>Project\Tracking</Filter>
     </ClCompile>
-    <ClCompile Include="DataLoader.cpp">
-      <Filter>Project\Utility</Filter>
-    </ClCompile>
     <ClCompile Include="RenderedTextBuffer.cpp">
       <Filter>Project\Graphics</Filter>
     </ClCompile>
@@ -77,6 +74,13 @@
     </ClCompile>
     <ClCompile Include="IEventDispatcher.cpp">
       <Filter>Project\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitManager.cpp" />
+    <ClCompile Include="DataManager.cpp">
+      <Filter>Project\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="IFrameListener.cpp">
+      <Filter>Project</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -116,9 +120,6 @@
     <ClInclude Include="TrackedObject.h">
       <Filter>Project\Tracking</Filter>
     </ClInclude>
-    <ClInclude Include="DataLoader.h">
-      <Filter>Project\Utility</Filter>
-    </ClInclude>
     <ClInclude Include="RenderedTextBuffer.h">
       <Filter>Project\Graphics</Filter>
     </ClInclude>
@@ -145,6 +146,13 @@
     </ClInclude>
     <ClInclude Include="UpdateEventData.h">
       <Filter>Project\Events\EventData</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitManager.h" />
+    <ClInclude Include="DataManager.h">
+      <Filter>Project\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="IFrameListener.h">
+      <Filter>Project</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

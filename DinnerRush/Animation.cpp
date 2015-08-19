@@ -84,7 +84,7 @@ void Animation::nextFrame()
 
 	//ADD: Timer->Start
 }
-void Animation::goToFrame(int frame)
+void Animation::goToFrame(const int& frame)
 {
 	int holdFrame = m_CurrFrame;
 	m_CurrFrame = frame;

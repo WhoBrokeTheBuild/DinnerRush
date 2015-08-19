@@ -6,7 +6,7 @@
 #include "TrackedObject.h"
 
 class Sprite;
-class EventData;
+class Event;
 
 class Animation : 
 	public TrackedObject
@@ -23,8 +23,8 @@ public:
 
 	void update(const Event& evt);
 
-	float getSpeed(void) const { return m_Speed; }
-	void setSpeed(float val) { m_Speed = val; }
+	double getSpeed(void) const { return m_Speed; }
+	void setSpeed(double speed) { m_Speed = speed; }
 	
 	void nextFrame(void);
 	void goToFrame(const int& frame);
@@ -35,8 +35,8 @@ private:
 				m_FrameNum;
 
 	/// The animation speed in milliseconds
-	float		m_Speed;
-	float		m_MSUntilNextFrame;
+	double		m_Speed,
+				m_MSUntilNextFrame;
 
 	bool		m_Loop;
 

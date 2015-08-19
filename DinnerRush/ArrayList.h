@@ -84,9 +84,9 @@ public:
 	 * \param item The item to look for in the list
 	 * \returns True if the element is in the list, False otherwise
 	 */
-	inline bool contains( const T& item ) const 
+	inline bool contains( T item ) const
 		{ return (isEmpty() ? false : 
-			find(cbegin(), cend(), item) != cend()); }
+			std::find(cbegin(), cend(), item) != cend()); }
 
 	/// Returns if the given index exists within the list
 	/*!
@@ -187,16 +187,16 @@ public:
     inline ReverseIterator rend( void )
         { return m_List.rend(); }
 
-    inline ConstIterator cbegin( void )
+    inline ConstIterator cbegin( void ) const
         { return m_List.cbegin(); }
 
-    inline ConstIterator cend( void )
+    inline ConstIterator cend( void ) const
         { return m_List.cend(); }
 
-    inline ConstReverseIterator crbegin( void )
+    inline ConstReverseIterator crbegin( void ) const
         { return m_List.crbegin(); }
 
-    inline ConstReverseIterator crend( void )
+    inline ConstReverseIterator crend( void ) const
         { return m_List.crend(); }
 
 private:
@@ -225,6 +225,5 @@ bool ArrayList<T>::remove(const T& item)
 		}
 	return false;
 }
-
 
 #endif // ARRAY_LIST_H

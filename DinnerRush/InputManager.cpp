@@ -5,12 +5,12 @@
 InputManager::InputManager()
 {
 	gameStarted = false;
-};
+}
 
 InputManager::~InputManager()
 {
 
-};
+}
 
 void InputManager::update()
 {

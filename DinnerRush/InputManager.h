@@ -24,7 +24,7 @@ class InputManager :
 public:
 
 	InputManager(void);
-	~InputManager(void);
+	virtual ~InputManager(void);
 
 	virtual inline string getClassName(void) const { return "Input Manager"; }
 

@@ -8,13 +8,13 @@
 
 typedef string DataKey;
 
-class DataLoader :
+class DataManager :
 	public TrackedObject
 {
 public:
 
-	DataLoader();
-	~DataLoader();
+	DataManager();
+	~DataManager();
 
 	virtual inline string getClassName(void) const { return "Data Loader"; }
 

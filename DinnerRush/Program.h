@@ -7,11 +7,11 @@
 #include "IEventDispatcher.h"
 #include "TrackedObject.h"
 
-class TimeInfo;
-class DataLoader;
-class Font;
-class RenderedTextBuffer;
+class DataManager;
 class InputManager;
+class UnitManager;
+
+class TimeInfo;
 
 struct SDL_Window;
 struct SDL_Renderer;
@@ -48,9 +48,10 @@ public:
 
 	double getActualFPS() const { return m_CurrentFPS; }
 
-	//Add handleEvent
+	InputManager* getInputManager(void) const;
+	UnitManager* getUnitManager(void) const;
 
-	DataLoader* getDataLoader(void) const;
+	DataManager* getDataLoader(void) const;
 
 	SDL_Window* getSDLWindow(void) const;
 	SDL_Renderer* getSDLRenderer(void) const;
@@ -63,9 +64,9 @@ private:
 					m_CurrentFPS,
 					m_UpdateInterval;
 
-	DataLoader		*mp_DataLoader;
-
+	DataManager		*mp_DataManager;
 	InputManager    *mp_InputManager;
+	UnitManager		*mp_UnitManager;
 
 	SDL_Window		*mp_Window;
 	SDL_Renderer	*mp_Renderer;

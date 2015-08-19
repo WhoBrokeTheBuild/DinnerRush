@@ -1,9 +1,18 @@
 #include "Unit.h"
+#include "Program.h"
 
-Unit::Unit() :
-	m_X(0),
-	m_Y(0)
-{ }
+Unit::Unit()
+{ 
+}
 
 Unit::~Unit()
-{ }
+{
+}
+
+void Unit::render(const Event& evt)
+{
+}
+
+void Unit::update(const Event& evt)
+{
+}

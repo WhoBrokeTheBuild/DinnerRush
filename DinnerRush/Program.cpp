@@ -5,15 +5,16 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 
-#include "Benchmark.h"
-#include "TimeInfo.h"
-#include "DataLoader.h"
 #include "Util.h"
-#include "Font.h"
-#include "Texture.h"
-#include "RenderedTextBuffer.h"
+#include "Benchmark.h"
+
+#include "DataManager.h"
 #include "InputManager.h"
+#include "UnitManager.h"
+
+#include "TimeInfo.h"
 #include "UpdateEventData.h"
+#include "Unit.h"
 
 Program * Program::sp_Instance = nullptr;
 
@@ -32,7 +33,9 @@ Program::Program(void) :
 	m_TargetFPS(),
 	m_CurrentFPS(),
 	m_UpdateInterval(),
-	mp_DataLoader(nullptr),
+	mp_DataManager(nullptr),
+	mp_InputManager(nullptr),
+	mp_UnitManager(nullptr),
 	mp_Window(nullptr),
 	mp_Renderer(nullptr)
 {
@@ -51,9 +54,6 @@ Program::Program(void) :
 
 Program::~Program(void)
 {
-	delete mp_InputManager;
-	mp_InputManager = NULL;
-
 	TTF_Quit();
 	SDL_Quit();
 }
@@ -66,13 +66,18 @@ void Program::init(void)
 
 	setTargetFPS(60.0);
 
-	mp_DataLoader = New DataLoader();
-	mp_DataLoader->loadData("GameData.bin");
+	mp_DataManager = New DataManager();
+	mp_DataManager->loadData("GameData.bin");
 
-	mp_DataLoader->saveData("GameData.out.txt");
-	mp_DataLoader->saveData("GameData.out.bin");
+	mp_DataManager->saveData("GameData.out.txt");
+	mp_DataManager->saveData("GameData.out.bin");
 
 	mp_InputManager = New InputManager();
+	mp_UnitManager = New UnitManager();
+
+	Unit *pTestUnit = New Unit();
+	mp_UnitManager->addUnit(pTestUnit);
+	mp_UnitManager->addTag("test", pTestUnit);
 
 	BENCH_PRINT("Program::init");
 }
@@ -81,7 +86,14 @@ void Program::term(void)
 {
 	BENCH_START();
 
-	delete mp_DataLoader;
+	delete mp_UnitManager;
+	mp_UnitManager = nullptr;
+
+	delete mp_InputManager;
+	mp_InputManager = nullptr;
+
+	delete mp_DataManager;
+	mp_DataManager = nullptr;
 
 	destroyWindow();
 
@@ -194,9 +206,19 @@ void Program::setTargetFPS(double fps)
 	m_UpdateInterval = (1.0 / m_TargetFPS);
 }
 
-DataLoader* Program::getDataLoader(void) const
+InputManager* Program::getInputManager(void) const
 {
-	return mp_DataLoader;
+	return mp_InputManager;
+}
+
+UnitManager* Program::getUnitManager(void) const
+{
+	return mp_UnitManager;
+}
+
+DataManager* Program::getDataLoader(void) const
+{
+	return mp_DataManager;
 }
 
 SDL_Window* Program::getSDLWindow(void) const

@@ -3,24 +3,29 @@
 #ifndef UNIT_H
 #define UNIT_H
 
-class Unit
+#include "IEventDispatcher.h"
+#include "IFrameListener.h"
+#include "TrackedObject.h"
+
+class Event;
+
+class Unit :
+	public IEventDispatcher,
+	public IFrameListener,
+	public TrackedObject
 {
 public:
 
-	Unit();
+	Unit(void);
+	~Unit(void);
 
-	~Unit();
+	virtual inline string getClassName(void) const { return "Unit"; }
 
-	int getX() const { return m_X; }
-	void setX(int val) { m_X = val; }
-
-	int getY() const { return m_Y; }
-	void setY(int val) { m_Y = val; }
+	virtual void render(const Event& evt);
+	virtual void update(const Event& evt);
 
 private:
 
-	int		m_X,
-			m_Y;
 
 }; // Unit
 

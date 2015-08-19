@@ -1,4 +1,4 @@
-#include "DataLoader.h"
+#include "DataManager.h"
 #include <fstream>
 #include <iostream>
 
@@ -8,19 +8,19 @@
 using std::ifstream;
 using std::ofstream;
 
-DataLoader::DataLoader()
+DataManager::DataManager()
 {
 
 }
 
-DataLoader::~DataLoader()
+DataManager::~DataManager()
 {
 	m_StrMap.clear();
 	m_IntMap.clear(); 
 	m_FltMap.clear();
 }
 
-void DataLoader::loadData(const string& filename)
+void DataManager::loadData(const string& filename)
 {
 	const string& ext = getFileExt(filename);
 
@@ -33,7 +33,7 @@ void DataLoader::loadData(const string& filename)
 
 }
 
-void DataLoader::saveData(const string& filename) const
+void DataManager::saveData(const string& filename) const
 {
 	const string& ext = getFileExt(filename);
 
@@ -45,7 +45,7 @@ void DataLoader::saveData(const string& filename) const
 	}
 }
 
-int DataLoader::getInt(const DataKey& key) const
+int DataManager::getInt(const DataKey& key) const
 {
 	auto iter = m_IntMap.find(key);
 	int toReturn = -1;
@@ -58,7 +58,7 @@ int DataLoader::getInt(const DataKey& key) const
 	return toReturn;
 }
 
-string DataLoader::getString(const DataKey& key) const
+string DataManager::getString(const DataKey& key) const
 {
 	auto iter = m_StrMap.find(key);
 	string toReturn = "_";
@@ -71,7 +71,7 @@ string DataLoader::getString(const DataKey& key) const
 	return toReturn;
 }
 
-string DataLoader::getAsset(const DataKey& key) const
+string DataManager::getAsset(const DataKey& key) const
 {
 	auto iter = m_StrMap.find(key);
 	string path = getString("AssetPath");
@@ -85,7 +85,7 @@ string DataLoader::getAsset(const DataKey& key) const
 	return toReturn;
 }
 
-float DataLoader::getFloat(const DataKey& key) const
+float DataManager::getFloat(const DataKey& key) const
 {
 	auto iter = m_FltMap.find(key);
 	float toReturn = -1;
@@ -98,7 +98,7 @@ float DataLoader::getFloat(const DataKey& key) const
 	return toReturn;
 }
 
-Point DataLoader::getPoint(const DataKey& key1, const DataKey& key2) const
+Point DataManager::getPoint(const DataKey& key1, const DataKey& key2) const
 {
 	auto iter1 = m_IntMap.find(key1);
 	auto iter2 = m_IntMap.find(key2);
@@ -113,7 +113,7 @@ Point DataLoader::getPoint(const DataKey& key1, const DataKey& key2) const
 	return toReturn;
 }
 
-void DataLoader::loadTextData(const string& filename)
+void DataManager::loadTextData(const string& filename)
 {
 	BENCH_START();
 
@@ -186,7 +186,7 @@ void DataLoader::loadTextData(const string& filename)
 	BENCH_PRINT("DataLoader::loadTextData");
 }
 
-void DataLoader::loadBinaryData(const string& filename)
+void DataManager::loadBinaryData(const string& filename)
 {
 	BENCH_START();
 
@@ -248,7 +248,7 @@ void DataLoader::loadBinaryData(const string& filename)
 	BENCH_PRINT("DataLoader::loadBinaryData");
 }
 
-void DataLoader::saveTextData(const string& filename) const
+void DataManager::saveTextData(const string& filename) const
 {
 	BENCH_START();
 
@@ -280,7 +280,7 @@ void DataLoader::saveTextData(const string& filename) const
 	BENCH_PRINT("DataLoader::saveTextData");
 }
 
-void DataLoader::saveBinaryData(const string& filename) const
+void DataManager::saveBinaryData(const string& filename) const
 {
 	BENCH_START();
 
@@ -318,7 +318,7 @@ void DataLoader::saveBinaryData(const string& filename) const
 	BENCH_PRINT("DataLoader::saveBinaryData");
 }
 
-void DataLoader::printAll(void) const
+void DataManager::printAll(void) const
 {
 	for (auto iter = m_StrMap.cbegin(); iter != m_StrMap.cend(); ++iter) {
 		std::cout << "s " << iter->first << " " << iter->second << "\n";
