@@ -185,6 +185,9 @@
   <ItemGroup>
     <Text Include="GameData.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Assets\WalkingPerson.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

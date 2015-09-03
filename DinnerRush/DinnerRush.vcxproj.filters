@@ -31,6 +31,9 @@
     <Filter Include="Project\Events\EventData">
       <UniqueIdentifier>{90eaa58e-1fd5-4312-9a8c-db50138dcea4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\Assets">
+      <UniqueIdentifier>{475cd95f-b30e-4e95-ba21-e678bf85aa6e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -159,5 +162,10 @@
     <Text Include="GameData.txt">
       <Filter>Project</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Assets\WalkingPerson.png">
+      <Filter>Project\Assets</Filter>
+    </Image>
   </ItemGroup>
 </Project>
