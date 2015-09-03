@@ -5,6 +5,11 @@ Unit::Unit()
 { 
 }
 
+Unit::Unit(Animation* animation)
+{
+	mp_Anim = animation;
+}
+
 Unit::~Unit()
 {
 }

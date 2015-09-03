@@ -8,6 +8,7 @@
 #include "TrackedObject.h"
 
 class Event;
+class Animation;
 
 class Unit :
 	public IEventDispatcher,
@@ -17,6 +18,7 @@ class Unit :
 public:
 
 	Unit(void);
+	Unit(Animation* animation);
 	~Unit(void);
 
 	virtual inline string getClassName(void) const { return "Unit"; }
@@ -26,6 +28,7 @@ public:
 
 private:
 
+	Animation* mp_Anim;
 
 }; // Unit
 
